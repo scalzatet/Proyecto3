@@ -1,22 +1,24 @@
 const db = require("../index");
-const mysql = require('mysql2');
 
 const findUser = async (body) => {
-    console.log('Entrós');
-    return await db.sequelize.query(
+    //console.log('findUser');
+    let datos =  await db.sequelize.query(
         `SELECT * FROM USERS WHERE USER = "${body.user}";`,
         { type: db.sequelize.QueryTypes.SELECT });
+    return datos;
 };
 
-/* const createUser = async (body) => {
-  return await database.sequelize.query(
-    `INSERT INTO USERS (email, password, username, fullname, cellphone, shippingAddress, roleId) 
-     VALUES ("${body.email}","${body.password}","${body.username}","${body.fullname}", "${body.cellphone}", "${body.shippingAddress}", ${body.roleId});`,
-    { type: database.sequelize.QueryTypes.INSERT }
+const createUser = async (body) => {
+  //console.log('Entrò a createUser');
+  return await db.sequelize.query(
+    `INSERT INTO USERS (user, nameu, email, cellphone, adress, password, roleId) 
+     VALUES ("${body.user}","${body.nameu}","${body.email}","${body.cellphone}", "${body.adress}", "${body.password}", ${body.roleId});`,
+    { type: db.sequelize.QueryTypes.INSERT }
   );
 };
- */
+ 
+
 module.exports = {
-  findUser
-  //createUser,
+  findUser,
+  createUser
 };

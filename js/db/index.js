@@ -1,14 +1,20 @@
 const Sequelize = require("sequelize");
 const db = {};
 
-//const database = new Sequelize("mysql://root:@localhost:3307/delilahresto");
 
-const sequelize = new Sequelize("dbproyecto", "root", "lala2280_", {
+const sequelize = new Sequelize("dbresto", "root", "ejemplo_password", {
   dialect: "mysql",
-  host: "localhost",
+  port: "3307", /////////ACLARAR EN README///////////////
+  host: "127.0.0.1"
 });
 
+
 db.sequelize = sequelize;
-//database.Sequelize = Sequelize;
+
+sequelize.authenticate().then(()=>{
+  console.log('Está conectado OK');
+}).catch(err=>{
+  console.log(err);
+});
 
 module.exports = db;
