@@ -68,6 +68,9 @@ POST --> Login usuario URL: http://localhost:7000/user/login
 
 POST --> Crear usuario URL: http://localhost:7000/user/createuser
 
+GET --> Consultar usuarios URL: http://localhost:7000/user/
+
+
 
 
 

@@ -1,12 +1,16 @@
 const router = require('express').Router();
 
-const { vLogin,vCreateU } = require('../middlewares/user');
+const { vLogin,vCreateU,vToken } = require('../middlewares/user');
+
 
 const jwt = require('jsonwebtoken');
 
 const access = require('../db/access/user');
 
 const secret = '$eCr3t';
+
+const roleIdA = 2;
+
 
 //////////////////////////////Loguear usuario///////////////////////
 
@@ -64,8 +68,26 @@ router.post('/createuser', vCreateU,  async (req, res) => {
     }
 });
 
+//////////////////////////////Listar Usuarios///////////////////////
 
+router.get("/", vToken, async (req, res) => {   
+    try {
+        const { roleId, userId } = req.body;
+  
+        let users = null;
+    
+        if (roleId === roleIdA) {
+          users = await access.findUsers();////
+        } else {
+          users = await access.findUserId(userId);//
+        }
+    
+        return res.json(users);
+      } catch (error) {
+        res.status(400).json({ error: 'No posee los permisos requeridos'});
+      }
 
+  });
 
 
 //////////////////////////////Exports///////////////////////

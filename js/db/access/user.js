@@ -16,9 +16,29 @@ const createUser = async (body) => {
     { type: db.sequelize.QueryTypes.INSERT }
   );
 };
+
+const findUsers = async () => {
+  return await db.sequelize.query(`SELECT * FROM USERS`, {
+    type: db.sequelize.QueryTypes.SELECT,
+  });
+};
+
+
+const findUserId = async (userId) => {
+  return await db.sequelize.query(
+    `SELECT * FROM USERS WHERE USERS.id = ${userId};`,
+    {
+      type: db.sequelize.QueryTypes.SELECT,
+    }
+  );
+};
+
+
  
 
 module.exports = {
   findUser,
-  createUser
+  createUser,
+  findUsers,
+  findUserId
 };
